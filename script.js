@@ -32,11 +32,8 @@ let fields = []
 function saveData() {
 
   const data = {
-
     farmTitle: farmTitleInput.value,
-
     fields: fields
-
   }
 
   localStorage.setItem(
@@ -58,13 +55,31 @@ function loadData() {
 
   }
 
-  const parsedData = JSON.parse(savedData)
+  try {
 
-  farmTitleInput.value = parsedData.farmTitle
+    const parsedData = JSON.parse(savedData)
 
-  fields = parsedData.fields
+    farmTitleInput.value =
+      parsedData.farmTitle || "すいすい農園"
 
-  renderFields()
+    fields = parsedData.fields || []
+
+    if (fields.length === 0) {
+      createField()
+      return
+    }
+
+    renderFields()
+
+  }
+
+  catch(error) {
+
+    console.log(error)
+
+    createField()
+
+  }
 
 }
 
@@ -72,7 +87,7 @@ function createField() {
 
   const field = {
 
-    id: Date.now(),
+    id: Date.now() + Math.random(),
 
     name: "新しい畑",
 
@@ -225,7 +240,9 @@ function renderFields() {
 
 function waterField(id) {
 
-  const field = fields.find((f) => f.id === id)
+  const field = fields.find((f) => f.id == id)
+
+  if (!field) return
 
   field.humidity = 100
 
@@ -237,7 +254,9 @@ function waterField(id) {
 
 function changeFieldName(id, value) {
 
-  const field = fields.find((f) => f.id === id)
+  const field = fields.find((f) => f.id == id)
+
+  if (!field) return
 
   field.name = value
 
@@ -247,7 +266,9 @@ function changeFieldName(id, value) {
 
 function changeVegetable(id, value) {
 
-  const field = fields.find((f) => f.id === id)
+  const field = fields.find((f) => f.id == id)
+
+  if (!field) return
 
   field.vegetable = value
 
@@ -259,15 +280,15 @@ function changeVegetable(id, value) {
 
 function connectSensor(id) {
 
-  const field = fields.find((f) => f.id === id)
+  const field = fields.find((f) => f.id == id)
+
+  if (!field) return
 
   const result = confirm(
     `${field.name} のセンサー接続を開始しますか？`
   )
 
-  if (!result) {
-    return
-  }
+  if (!result) return
 
   field.sensorConnected = true
 
@@ -298,9 +319,7 @@ setInterval(() => {
     field.humidity -= 1
 
     if (field.humidity < 0) {
-
       field.humidity = 0
-
     }
 
   })
