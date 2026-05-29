@@ -1,4 +1,3 @@
-```javascript
 const fieldsContainer = document.getElementById("fields-container")
 const addFieldButton = document.getElementById("add-field-button")
 const farmTitleInput = document.getElementById("farm-title-input")
@@ -32,8 +31,11 @@ let fields = []
 function saveData() {
 
   const data = {
+
     farmTitle: farmTitleInput.value,
+
     fields: fields
+
   }
 
   localStorage.setItem(
@@ -65,8 +67,11 @@ function loadData() {
     fields = parsedData.fields || []
 
     if (fields.length === 0) {
+
       createField()
+
       return
+
     }
 
     renderFields()
@@ -87,7 +92,7 @@ function createField() {
 
   const field = {
 
-    id: Date.now() + Math.random(),
+    id: crypto.randomUUID(),
 
     name: "新しい畑",
 
@@ -138,12 +143,12 @@ function renderFields() {
       <input
         class="field-name"
         value="${field.name}"
-        onchange="changeFieldName(${field.id}, this.value)"
+        onchange="changeFieldName('${field.id}', this.value)"
       >
 
       <select
         class="vegetable-select"
-        onchange="changeVegetable(${field.id}, this.value)"
+        onchange="changeVegetable('${field.id}', this.value)"
       >
 
         <option value="tomato"
@@ -195,7 +200,7 @@ function renderFields() {
 
       <button
         class="water-button"
-        onclick="waterField(${field.id})"
+        onclick="waterField('${field.id}')"
       >
         🚿 水をあげる
       </button>
@@ -219,7 +224,7 @@ function renderFields() {
 
         <button
           class="sensor-button"
-          onclick="connectSensor(${field.id})"
+          onclick="connectSensor('${field.id}')"
         >
 
           ${field.sensorConnected
@@ -240,7 +245,7 @@ function renderFields() {
 
 function waterField(id) {
 
-  const field = fields.find((f) => f.id == id)
+  const field = fields.find((f) => f.id === id)
 
   if (!field) return
 
@@ -254,7 +259,7 @@ function waterField(id) {
 
 function changeFieldName(id, value) {
 
-  const field = fields.find((f) => f.id == id)
+  const field = fields.find((f) => f.id === id)
 
   if (!field) return
 
@@ -266,7 +271,7 @@ function changeFieldName(id, value) {
 
 function changeVegetable(id, value) {
 
-  const field = fields.find((f) => f.id == id)
+  const field = fields.find((f) => f.id === id)
 
   if (!field) return
 
@@ -280,7 +285,7 @@ function changeVegetable(id, value) {
 
 function connectSensor(id) {
 
-  const field = fields.find((f) => f.id == id)
+  const field = fields.find((f) => f.id === id)
 
   if (!field) return
 
@@ -319,7 +324,9 @@ setInterval(() => {
     field.humidity -= 1
 
     if (field.humidity < 0) {
+
       field.humidity = 0
+
     }
 
   })
