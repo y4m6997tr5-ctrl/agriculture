@@ -1,62 +1,32 @@
-let humidity = 70
+body {
+  margin: 0;
+  padding: 20px;
 
-const gaugeFill = document.getElementById("gauge-fill")
-const humidityText = document.getElementById("humidity-text")
-const statusText = document.getElementById("status")
-const character = document.getElementById("character")
+  font-family: sans-serif;
 
-const waterButton = document.getElementById("water-button")
-
-function updateUI() {
-
-  gaugeFill.style.width = humidity + "%"
-
-  humidityText.textContent = humidity + "%"
-
-  if (humidity >= 70) {
-
-    statusText.textContent = "とても元気！"
-
-    character.textContent = "🥬"
-
-  }
-
-  else if (humidity >= 40) {
-
-    statusText.textContent = "少し乾燥中"
-
-    character.textContent = "🌱"
-
-  }
-
-  else {
-
-    statusText.textContent = "カラカラ！"
-
-    character.textContent = "🥺"
-
-  }
-
+  background: #d9f99d;
 }
 
-waterButton.addEventListener("click", () => {
+.app {
+  max-width: 500px;
+  margin: auto;
+}
 
-  humidity = 100
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  updateUI()
+  margin-bottom: 20px;
+}
 
-})
+h1 {
+  color: #4d7c0f;
+}
 
-setInterval(() => {
+#add-field-button {
+  border: none;
+  background: #84cc16;
+  color: white;
 
-  humidity--
-
-  if (humidity < 0) {
-    humidity = 0
-  }
-
-  updateUI()
-
-}, 5000)
-
-updateUI()
+}
