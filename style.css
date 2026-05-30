@@ -1,236 +1,228 @@
 body {
-  margin: 0;
-  padding: 20px;
+margin: 0;
+padding: 20px;
 
-  font-family: sans-serif;
+font-family: sans-serif;
 
-  background: #d9f99d;
+background: #d9f99d;
 }
 
 .app {
-  max-width: 500px;
-  margin: auto;
+max-width: 500px;
+margin: auto;
 }
 
 .farm-title-input {
-  width: 100%;
+width: 100%;
 
-  font-size: 32px;
-  font-weight: bold;
+font-size: 32px;
+font-weight: bold;
 
-  text-align: center;
+text-align: center;
 
-  border: none;
+border: none;
 
-  background: transparent;
+background: transparent;
 
-  color: #4d7c0f;
+color: #4d7c0f;
 
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 .header {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 #add-field-button {
-  border: none;
+border: none;
 
-  background: #84cc16;
+background: #84cc16;
 
-  color: white;
+color: white;
 
-  padding: 14px 20px;
+padding: 14px 20px;
 
-  border-radius: 18px;
+border-radius: 18px;
 
-  font-size: 18px;
-  font-weight: bold;
+font-size: 18px;
+font-weight: bold;
 
-  cursor: pointer;
+cursor: pointer;
 }
 
 .field-card {
-  background: #f7fee7;
+background: #f7fee7;
 
-  border-radius: 30px;
+border-radius: 30px;
 
-  padding: 20px;
+padding: 20px;
 
-  margin-bottom: 20px;
+margin-bottom: 20px;
 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .field-name {
-  width: 100%;
+width: 100%;
 
-  padding: 12px;
+padding: 12px;
 
-  border-radius: 14px;
+border-radius: 14px;
 
-  border: 2px solid #d9f99d;
+border: 2px solid #d9f99d;
 
-  margin-bottom: 15px;
+margin-bottom: 15px;
 
-  font-size: 18px;
+font-size: 18px;
 
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
 .vegetable-select {
-  width: 100%;
+width: 100%;
 
-  padding: 12px;
+padding: 12px;
 
-  border-radius: 14px;
+border-radius: 14px;
 
-  border: 2px solid #d9f99d;
+border: 2px solid #d9f99d;
 
-  margin-bottom: 20px;
+margin-bottom: 20px;
 
-  font-size: 16px;
+font-size: 16px;
 }
 
 .character {
-  font-size: 90px;
+font-size: 90px;
 
-  text-align: center;
+text-align: center;
 
-  margin: 20px 0;
+margin: 20px 0;
 }
 
 .status {
-  text-align: center;
+text-align: center;
 
-  font-size: 24px;
+font-size: 24px;
 
-  font-weight: bold;
+font-weight: bold;
 
-  color: #4d7c0f;
+color: #4d7c0f;
 }
 
 .gauge {
-  width: 100%;
+width: 100%;
 
-  height: 25px;
+height: 25px;
 
-  background: #d9f99d;
+background: #d9f99d;
 
-  border-radius: 999px;
+border-radius: 999px;
 
-  overflow: hidden;
+overflow: hidden;
 
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 .gauge-fill {
-  height: 100%;
+height: 100%;
 
-  background: #65a30d;
+background: #65a30d;
 
-  transition: 0.3s;
+transition: 0.3s;
 }
 
 .humidity-text {
-  margin-top: 10px;
+margin-top: 10px;
 
-  text-align: center;
+text-align: center;
 
-  font-weight: bold;
+font-weight: bold;
 }
 
 .water-button {
-  width: 100%;
+width: 100%;
 
-  margin-top: 20px;
+margin-top: 20px;
 
-  border: none;
+border: none;
 
-  background: #84cc16;
+background: #84cc16;
 
-  color: white;
+color: white;
 
-  padding: 16px;
+padding: 16px;
 
-  border-radius: 20px;
+border-radius: 20px;
 
-  font-size: 20px;
+font-size: 20px;
 
-  font-weight: bold;
+font-weight: bold;
 
-  cursor: pointer;
-}
-
-.water-button:hover {
-  background: #65a30d;
+cursor: pointer;
 }
 
 .warning {
-  margin-top: 20px;
+margin-top: 20px;
 
-  background: #fecaca;
+background: #fecaca;
 
-  color: #991b1b;
+color: #991b1b;
 
-  padding: 14px;
+padding: 14px;
 
-  border-radius: 16px;
+border-radius: 16px;
 
-  text-align: center;
+text-align: center;
 
-  font-weight: bold;
+font-weight: bold;
 }
 
 .sensor-area {
-  margin-top: 20px;
+margin-top: 20px;
 }
 
 .sensor-status {
-  padding: 12px;
+padding: 12px;
 
-  border-radius: 16px;
+border-radius: 16px;
 
-  text-align: center;
+text-align: center;
 
-  font-weight: bold;
+font-weight: bold;
 
-  margin-bottom: 10px;
+margin-bottom: 10px;
 }
 
 .sensor-connected {
-  background: #bbf7d0;
-  color: #166534;
+background: #bbf7d0;
+color: #166534;
 }
 
 .sensor-disconnected {
-  background: #fecaca;
-  color: #991b1b;
+background: #fecaca;
+color: #991b1b;
 }
 
 .sensor-button {
-  width: 100%;
+width: 100%;
 
-  border: none;
+border: none;
 
-  background: #38bdf8;
+background: #38bdf8;
 
-  color: white;
+color: white;
 
-  padding: 14px;
+padding: 14px;
 
-  border-radius: 18px;
+border-radius: 18px;
 
-  font-size: 16px;
+font-size: 16px;
 
-  font-weight: bold;
+font-weight: bold;
 
-  cursor: pointer;
-}
-
-.sensor-button:hover {
-  background: #0ea5e9;
+cursor: pointer;
 }
