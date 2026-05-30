@@ -1,9 +1,8 @@
-const fieldsContainer = document.getElementById("fields-container")
-const addFieldButton = document.getElementById("add-field-button")
-const farmTitleInput = document.getElementById("farm-title-input")
+const fieldsContainer = document.getElementById("fields-container");
+const addFieldButton = document.getElementById("add-field-button");
+const farmTitleInput = document.getElementById("farm-title-input");
 
 const vegetables = {
-
 tomato: {
 name: "トマト",
 emoji: "🍅"
@@ -23,64 +22,56 @@ watermelon: {
 name: "スイカ",
 emoji: "🍉"
 }
+};
 
-}
-
-let fields = []
+let fields = [];
 
 function saveData() {
 
 const data = {
-
-```
 farmTitle: farmTitleInput.value,
-
 fields: fields
-```
-
-}
+};
 
 localStorage.setItem(
 "farm-app-data",
 JSON.stringify(data)
-)
+);
 
 }
 
 function loadData() {
 
-const savedData = localStorage.getItem("farm-app-data")
+const savedData = localStorage.getItem("farm-app-data");
 
 if (!savedData) {
-
-```
-createField()
-
-return
-```
-
+createField();
+return;
 }
 
 try {
 
-```
-const parsedData = JSON.parse(savedData)
+const parsedData = JSON.parse(savedData);
 
 farmTitleInput.value =
-  parsedData.farmTitle || "すいすい農園"
+  parsedData.farmTitle || "すいすい農園";
 
-fields = parsedData.fields || []
+fields = parsedData.fields || [];
 
-renderFields()
-```
+if (fields.length === 0) {
+  createField();
+  return;
+}
+
+renderFields();
 
 }
 
 catch(error) {
 
-```
-createField()
-```
+console.log(error);
+
+createField();
 
 }
 
@@ -89,79 +80,59 @@ createField()
 function createField() {
 
 const field = {
-
-```
 id: crypto.randomUUID(),
-
 name: "新しい畑",
-
 vegetable: "tomato",
-
 humidity: 70,
-
 sensorConnected: false
-```
+};
 
-}
+fields.push(field);
 
-fields.push(field)
+renderFields();
 
-renderFields()
-
-saveData()
+saveData();
 
 }
 
 function renderFields() {
 
-fieldsContainer.innerHTML = ""
+fieldsContainer.innerHTML = "";
 
 fields.forEach((field) => {
 
-```
-const vegetableData = vegetables[field.vegetable]
+const vegetableData =
+  vegetables[field.vegetable];
 
-let status = "とても元気！"
+let status = "とても元気！";
 
 if (field.humidity < 70) {
-  status = "少し乾燥中"
+  status = "少し乾燥中";
 }
 
 if (field.humidity < 40) {
-  status = "カラカラ！"
+  status = "カラカラ！";
 }
 
-const warningHTML = field.humidity < 40
-  ? `<div class="warning">⚠️ 水不足です！</div>`
-  : ""
+const warningHTML =
+  field.humidity < 40
+  ? '<div class="warning">⚠️ 水不足です！</div>'
+  : "";
 
-const sensorText = field.sensorConnected
-  ? "✅ センサー接続済み"
-  : "⚠️ センサーに繋がってません"
+const card = document.createElement("div");
 
-const sensorClass = field.sensorConnected
-  ? "sensor-connected"
-  : "sensor-disconnected"
-
-const sensorButtonText = field.sensorConnected
-  ? "センサー再接続"
-  : "センサーを接続"
-
-const card = document.createElement("div")
-
-card.className = "field-card"
+card.className = "field-card";
 
 card.innerHTML = `
-
   <input
     class="field-name"
     value="${field.name}"
-    data-id="${field.id}"
+    onchange="changeFieldName('${field.id}', this.value)"
   >
 
   <select
     class="vegetable-select"
-    data-id="${field.id}"
+    onchange="changeVegetable('${field.id}', this.value)"
   >
 
     <option value="tomato"
@@ -213,7 +184,7 @@ card.innerHTML = `
 
   <button
     class="water-button"
-    data-water-id="${field.id}"
+    onclick="waterField('${field.id}')"
   >
     🚿 水をあげる
   </button>
@@ -224,149 +195,133 @@ card.innerHTML = `
 
     <div class="
       sensor-status
-      ${sensorClass}
+      ${field.sensorConnected
+        ? "sensor-connected"
+        : "sensor-disconnected"}
     ">
-      ${sensorText}
+
+      ${field.sensorConnected
+        ? "✅ センサー接続済み"
+        : "⚠️ センサーに繋がってません"}
+
     </div>
 
     <button
       class="sensor-button"
-      data-sensor-id="${field.id}"
+      onclick="connectSensor('${field.id}')"
     >
-      ${sensorButtonText}
+
+      ${field.sensorConnected
+        ? "センサー再接続"
+        : "センサーを接続"}
+
     </button>
 
   </div>
+`;
 
-`
+fieldsContainer.appendChild(card);
 
-fieldsContainer.appendChild(card)
-```
-
-})
-
-addEvents()
+});
 
 }
 
-function addEvents() {
+function waterField(id) {
 
-document.querySelectorAll(".field-name")
-.forEach((input) => {
+const field =
+fields.find((f) => f.id === id);
 
-```
-  input.addEventListener("input", (e) => {
+if (!field) return;
 
-    const id = e.target.dataset.id
+field.humidity = 100;
 
-    const field = fields.find((f) => f.id === id)
+renderFields();
 
-    field.name = e.target.value
-
-    saveData()
-
-  })
-
-})
-```
-
-document.querySelectorAll(".vegetable-select")
-.forEach((select) => {
-
-```
-  select.addEventListener("change", (e) => {
-
-    const id = e.target.dataset.id
-
-    const field = fields.find((f) => f.id === id)
-
-    field.vegetable = e.target.value
-
-    renderFields()
-
-    saveData()
-
-  })
-
-})
-```
-
-document.querySelectorAll(".water-button")
-.forEach((button) => {
-
-```
-  button.addEventListener("click", (e) => {
-
-    const id = e.target.dataset.waterId
-
-    const field = fields.find((f) => f.id === id)
-
-    field.humidity = 100
-
-    renderFields()
-
-    saveData()
-
-  })
-
-})
-```
-
-document.querySelectorAll(".sensor-button")
-.forEach((button) => {
-
-```
-  button.addEventListener("click", (e) => {
-
-    const id = e.target.dataset.sensorId
-
-    const field = fields.find((f) => f.id === id)
-
-    field.sensorConnected = true
-
-    renderFields()
-
-    saveData()
-
-    alert("センサー接続完了！")
-
-  })
-
-})
-```
+saveData();
 
 }
 
-addFieldButton.addEventListener("click", () => {
+function changeFieldName(id, value) {
 
-createField()
+const field =
+fields.find((f) => f.id === id);
 
-})
+if (!field) return;
 
-farmTitleInput.addEventListener("input", () => {
+field.name = value;
 
-saveData()
+saveData();
 
-})
+}
+
+function changeVegetable(id, value) {
+
+const field =
+fields.find((f) => f.id === id);
+
+if (!field) return;
+
+field.vegetable = value;
+
+renderFields();
+
+saveData();
+
+}
+
+function connectSensor(id) {
+
+const field =
+fields.find((f) => f.id === id);
+
+if (!field) return;
+
+const result = confirm(
+`${field.name} のセンサー接続を開始しますか？`
+);
+
+if (!result) return;
+
+field.sensorConnected = true;
+
+renderFields();
+
+saveData();
+
+alert("センサー接続が完了しました！");
+
+}
+
+addFieldButton.addEventListener(
+"click",
+() => {
+createField();
+}
+);
+
+farmTitleInput.addEventListener(
+"input",
+() => {
+saveData();
+}
+);
 
 setInterval(() => {
 
 fields.forEach((field) => {
 
-```
-field.humidity -= 1
+field.humidity -= 1;
 
 if (field.humidity < 0) {
-  field.humidity = 0
+  field.humidity = 0;
 }
-```
 
-})
+});
 
-renderFields()
+renderFields();
 
-saveData()
+saveData();
 
-}, 5000)
+}, 5000);
 
-loadData()
+loadData();
