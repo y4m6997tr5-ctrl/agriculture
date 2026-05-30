@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
@@ -8,30 +7,28 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
   <div class="app">
 
-<input
-  id="farm-title-input"
-  class="farm-title-input"
-  value="すいすい農園"
->
+    <input
+      id="farm-title-input"
+      class="farm-title-input"
+      value="すいすい農園"
+    >
 
-<div class="header">
+    <div class="header">
+      <button id="add-field-button">
+        ＋ 畑を追加
+      </button>
+    </div>
 
-  <button id="add-field-button">
-    ＋ 畑を追加
-  </button>
-
-</div>
-
-<div id="fields-container"></div>
+    <div class="slider-wrapper">
+      <div id="fields-container" class="fields-container"></div>
+    </div>
 
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
