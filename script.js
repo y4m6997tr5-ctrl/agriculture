@@ -4,25 +4,25 @@ const farmTitleInput = document.getElementById("farm-title-input")
 
 const vegetables = {
 
-  tomato: {
-    name: "トマト",
-    emoji: "🍅"
-  },
+tomato: {
+name: "トマト",
+emoji: "🍅"
+},
 
-  cucumber: {
-    name: "きゅうり",
-    emoji: "🥒"
-  },
+cucumber: {
+name: "きゅうり",
+emoji: "🥒"
+},
 
-  eggplant: {
-    name: "なす",
-    emoji: "🍆"
-  },
+eggplant: {
+name: "なす",
+emoji: "🍆"
+},
 
-  watermelon: {
-    name: "スイカ",
-    emoji: "🍉"
-  }
+watermelon: {
+name: "スイカ",
+emoji: "🍉"
+}
 
 }
 
@@ -30,310 +30,342 @@ let fields = []
 
 function saveData() {
 
-  const data = {
+const data = {
 
-    farmTitle: farmTitleInput.value,
+```
+farmTitle: farmTitleInput.value,
 
-    fields: fields
+fields: fields
+```
 
-  }
+}
 
-  localStorage.setItem(
-    "farm-app-data",
-    JSON.stringify(data)
-  )
+localStorage.setItem(
+"farm-app-data",
+JSON.stringify(data)
+)
 
 }
 
 function loadData() {
 
-  const savedData = localStorage.getItem("farm-app-data")
+const savedData = localStorage.getItem("farm-app-data")
 
-  if (!savedData) {
+if (!savedData) {
 
-    createField()
+```
+createField()
 
-    return
+return
+```
 
-  }
+}
 
-  try {
+try {
 
-    const parsedData = JSON.parse(savedData)
+```
+const parsedData = JSON.parse(savedData)
 
-    farmTitleInput.value =
-      parsedData.farmTitle || "すいすい農園"
+farmTitleInput.value =
+  parsedData.farmTitle || "すいすい農園"
 
-    fields = parsedData.fields || []
+fields = parsedData.fields || []
 
-    if (fields.length === 0) {
+renderFields()
+```
 
-      createField()
+}
 
-      return
+catch(error) {
 
-    }
+```
+createField()
+```
 
-    renderFields()
-
-  }
-
-  catch(error) {
-
-    console.log(error)
-
-    createField()
-
-  }
+}
 
 }
 
 function createField() {
 
-  const field = {
+const field = {
 
-    id: crypto.randomUUID(),
+```
+id: crypto.randomUUID(),
 
-    name: "新しい畑",
+name: "新しい畑",
 
-    vegetable: "tomato",
+vegetable: "tomato",
 
-    humidity: 70,
+humidity: 70,
 
-    sensorConnected: false
+sensorConnected: false
+```
 
-  }
+}
 
-  fields.push(field)
+fields.push(field)
 
-  renderFields()
+renderFields()
 
-  saveData()
+saveData()
 
 }
 
 function renderFields() {
 
-  fieldsContainer.innerHTML = ""
+fieldsContainer.innerHTML = ""
 
-  fields.forEach((field) => {
+fields.forEach((field) => {
 
-    const vegetableData = vegetables[field.vegetable]
+```
+const vegetableData = vegetables[field.vegetable]
 
-    let status = "とても元気！"
+let status = "とても元気！"
 
-    if (field.humidity < 70) {
-      status = "少し乾燥中"
-    }
+if (field.humidity < 70) {
+  status = "少し乾燥中"
+}
 
-    if (field.humidity < 40) {
-      status = "カラカラ！"
-    }
+if (field.humidity < 40) {
+  status = "カラカラ！"
+}
 
-    const warningHTML = field.humidity < 40
-      ? `<div class="warning">⚠️ 水不足です！</div>`
-      : ""
+const warningHTML = field.humidity < 40
+  ? `<div class="warning">⚠️ 水不足です！</div>`
+  : ""
 
-    const card = document.createElement("div")
+const sensorText = field.sensorConnected
+  ? "✅ センサー接続済み"
+  : "⚠️ センサーに繋がってません"
 
-    card.className = "field-card"
+const sensorClass = field.sensorConnected
+  ? "sensor-connected"
+  : "sensor-disconnected"
 
-    card.innerHTML = `
+const sensorButtonText = field.sensorConnected
+  ? "センサー再接続"
+  : "センサーを接続"
 
-      <input
-        class="field-name"
-        value="${field.name}"
-        onchange="changeFieldName('${field.id}', this.value)"
-      >
+const card = document.createElement("div")
 
-      <select
-        class="vegetable-select"
-        onchange="changeVegetable('${field.id}', this.value)"
-      >
+card.className = "field-card"
 
-        <option value="tomato"
-          ${field.vegetable === "tomato" ? "selected" : ""}
-        >
-          🍅 トマト
-        </option>
+card.innerHTML = `
 
-        <option value="cucumber"
-          ${field.vegetable === "cucumber" ? "selected" : ""}
-        >
-          🥒 きゅうり
-        </option>
+  <input
+    class="field-name"
+    value="${field.name}"
+    data-id="${field.id}"
+  >
 
-        <option value="eggplant"
-          ${field.vegetable === "eggplant" ? "selected" : ""}
-        >
-          🍆 なす
-        </option>
+  <select
+    class="vegetable-select"
+    data-id="${field.id}"
+  >
 
-        <option value="watermelon"
-          ${field.vegetable === "watermelon" ? "selected" : ""}
-        >
-          🍉 スイカ
-        </option>
+    <option value="tomato"
+      ${field.vegetable === "tomato" ? "selected" : ""}
+    >
+      🍅 トマト
+    </option>
 
-      </select>
+    <option value="cucumber"
+      ${field.vegetable === "cucumber" ? "selected" : ""}
+    >
+      🥒 きゅうり
+    </option>
 
-      <div class="character">
-        ${vegetableData.emoji}
-      </div>
+    <option value="eggplant"
+      ${field.vegetable === "eggplant" ? "selected" : ""}
+    >
+      🍆 なす
+    </option>
 
-      <div class="status">
-        ${status}
-      </div>
+    <option value="watermelon"
+      ${field.vegetable === "watermelon" ? "selected" : ""}
+    >
+      🍉 スイカ
+    </option>
 
-      <div class="gauge">
+  </select>
 
-        <div
-          class="gauge-fill"
-          style="width:${field.humidity}%"
-        ></div>
+  <div class="character">
+    ${vegetableData.emoji}
+  </div>
 
-      </div>
+  <div class="status">
+    ${status}
+  </div>
 
-      <div class="humidity-text">
-        土のうるおい ${field.humidity}%
-      </div>
+  <div class="gauge">
 
-      <button
-        class="water-button"
-        onclick="waterField('${field.id}')"
-      >
-        🚿 水をあげる
-      </button>
+    <div
+      class="gauge-fill"
+      style="width:${field.humidity}%"
+    ></div>
 
-      ${warningHTML}
+  </div>
 
-      <div class="sensor-area">
+  <div class="humidity-text">
+    土のうるおい ${field.humidity}%
+  </div>
 
-        <div class="
-          sensor-status
-          ${field.sensorConnected
-            ? "sensor-connected"
-            : "sensor-disconnected"}
-        ">
+  <button
+    class="water-button"
+    data-water-id="${field.id}"
+  >
+    🚿 水をあげる
+  </button>
 
-          ${field.sensorConnected
-            ? "✅ センサー接続済み"
-            : "⚠️ センサーに繋がってません"}
+  ${warningHTML}
 
-        </div>
+  <div class="sensor-area">
 
-        <button
-          class="sensor-button"
-          onclick="connectSensor('${field.id}')"
-        >
+    <div class="
+      sensor-status
+      ${sensorClass}
+    ">
+      ${sensorText}
+    </div>
 
-          ${field.sensorConnected
-            ? "センサー再接続"
-            : "センサーを接続"}
+    <button
+      class="sensor-button"
+      data-sensor-id="${field.id}"
+    >
+      ${sensorButtonText}
+    </button>
 
-        </button>
+  </div>
 
-      </div>
+`
 
-    `
+fieldsContainer.appendChild(card)
+```
 
-    fieldsContainer.appendChild(card)
+})
+
+addEvents()
+
+}
+
+function addEvents() {
+
+document.querySelectorAll(".field-name")
+.forEach((input) => {
+
+```
+  input.addEventListener("input", (e) => {
+
+    const id = e.target.dataset.id
+
+    const field = fields.find((f) => f.id === id)
+
+    field.name = e.target.value
+
+    saveData()
 
   })
 
-}
+})
+```
 
-function waterField(id) {
+document.querySelectorAll(".vegetable-select")
+.forEach((select) => {
 
-  const field = fields.find((f) => f.id === id)
+```
+  select.addEventListener("change", (e) => {
 
-  if (!field) return
+    const id = e.target.dataset.id
 
-  field.humidity = 100
+    const field = fields.find((f) => f.id === id)
 
-  renderFields()
+    field.vegetable = e.target.value
 
-  saveData()
+    renderFields()
 
-}
+    saveData()
 
-function changeFieldName(id, value) {
+  })
 
-  const field = fields.find((f) => f.id === id)
+})
+```
 
-  if (!field) return
+document.querySelectorAll(".water-button")
+.forEach((button) => {
 
-  field.name = value
+```
+  button.addEventListener("click", (e) => {
 
-  saveData()
+    const id = e.target.dataset.waterId
 
-}
+    const field = fields.find((f) => f.id === id)
 
-function changeVegetable(id, value) {
+    field.humidity = 100
 
-  const field = fields.find((f) => f.id === id)
+    renderFields()
 
-  if (!field) return
+    saveData()
 
-  field.vegetable = value
+  })
 
-  renderFields()
+})
+```
 
-  saveData()
+document.querySelectorAll(".sensor-button")
+.forEach((button) => {
 
-}
+```
+  button.addEventListener("click", (e) => {
 
-function connectSensor(id) {
+    const id = e.target.dataset.sensorId
 
-  const field = fields.find((f) => f.id === id)
+    const field = fields.find((f) => f.id === id)
 
-  if (!field) return
+    field.sensorConnected = true
 
-  const result = confirm(
-    `${field.name} のセンサー接続を開始しますか？`
-  )
+    renderFields()
 
-  if (!result) return
+    saveData()
 
-  field.sensorConnected = true
+    alert("センサー接続完了！")
 
-  renderFields()
+  })
 
-  saveData()
-
-  alert("センサー接続が完了しました！")
+})
+```
 
 }
 
 addFieldButton.addEventListener("click", () => {
 
-  createField()
+createField()
 
 })
 
 farmTitleInput.addEventListener("input", () => {
 
-  saveData()
+saveData()
 
 })
 
 setInterval(() => {
 
-  fields.forEach((field) => {
+fields.forEach((field) => {
 
-    field.humidity -= 1
+```
+field.humidity -= 1
 
-    if (field.humidity < 0) {
+if (field.humidity < 0) {
+  field.humidity = 0
+}
+```
 
-      field.humidity = 0
+})
 
-    }
+renderFields()
 
-  })
-
-  renderFields()
-
-  saveData()
+saveData()
 
 }, 5000)
 
