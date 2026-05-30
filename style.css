@@ -1,49 +1,66 @@
 body {
-  margin: 0;
-  padding: 20px;
-  font-family: sans-serif;
-  background: #d9f99d;
-  overflow-x: hidden;
+
+.gauge-fill {
+  height: 100%;
+  background: #65a30d;
+  transition: 0.3s;
 }
 
-.app {
-  max-width: 500px;
-  margin: auto;
-}
-
-.farm-title-input {
-  width: 100%;
-  font-size: 32px;
-  font-weight: bold;
+.humidity-text {
+  margin-top: 10px;
   text-align: center;
-  border: none;
-  background: transparent;
-  color: #4d7c0f;
-  margin-bottom: 20px;
+  font-weight: bold;
 }
 
-.header {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-#add-field-button {
+.water-button,
+.sensor-button {
+  width: 100%;
+  margin-top: 20px;
   border: none;
-  background: #84cc16;
   color: white;
-  padding: 14px 20px;
-  border-radius: 18px;
+  padding: 16px;
+  border-radius: 20px;
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;
 }
 
-.slider-wrapper {
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+.water-button {
+  background: #84cc16;
 }
 
-.fields-container {
+.sensor-button {
+  background: #38bdf8;
+}
+
+.warning {
+  margin-top: 20px;
+  background: #fecaca;
+  color: #991b1b;
+  padding: 14px;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sensor-area {
+  margin-top: 20px;
+}
+
+.sensor-status {
+  padding: 12px;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sensor-connected {
+  background: #bbf7d0;
+  color: #166534;
+}
+
+.sensor-disconnected {
+  background: #fecaca;
+  color: #991b1b;
 }
