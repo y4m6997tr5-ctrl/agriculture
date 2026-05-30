@@ -1,9 +1,7 @@
 body {
 margin: 0;
 padding: 20px;
-
 font-family: sans-serif;
-
 background: #d9f99d;
 }
 
@@ -14,170 +12,105 @@ margin: auto;
 
 .farm-title-input {
 width: 100%;
-
 font-size: 32px;
 font-weight: bold;
-
 text-align: center;
-
 border: none;
-
 background: transparent;
-
 color: #4d7c0f;
-
 margin-bottom: 20px;
 }
 
 .header {
 display: flex;
 justify-content: center;
-
 margin-bottom: 20px;
 }
 
 #add-field-button {
 border: none;
-
 background: #84cc16;
-
 color: white;
-
 padding: 14px 20px;
-
 border-radius: 18px;
-
 font-size: 18px;
 font-weight: bold;
-
 cursor: pointer;
 }
 
 .field-card {
 background: #f7fee7;
-
 border-radius: 30px;
-
 padding: 20px;
-
 margin-bottom: 20px;
-
 box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-.field-name {
-width: 100%;
-
-padding: 12px;
-
-border-radius: 14px;
-
-border: 2px solid #d9f99d;
-
-margin-bottom: 15px;
-
-font-size: 18px;
-
-box-sizing: border-box;
-}
-
+.field-name,
 .vegetable-select {
 width: 100%;
-
 padding: 12px;
-
 border-radius: 14px;
-
 border: 2px solid #d9f99d;
-
-margin-bottom: 20px;
-
-font-size: 16px;
+margin-bottom: 15px;
+font-size: 18px;
+box-sizing: border-box;
 }
 
 .character {
 font-size: 90px;
-
 text-align: center;
-
 margin: 20px 0;
 }
 
 .status {
 text-align: center;
-
 font-size: 24px;
-
 font-weight: bold;
-
 color: #4d7c0f;
 }
 
 .gauge {
 width: 100%;
-
 height: 25px;
-
 background: #d9f99d;
-
 border-radius: 999px;
-
 overflow: hidden;
-
 margin-top: 20px;
 }
 
 .gauge-fill {
 height: 100%;
-
 background: #65a30d;
-
 transition: 0.3s;
 }
 
 .humidity-text {
 margin-top: 10px;
-
 text-align: center;
-
 font-weight: bold;
 }
 
 .water-button {
 width: 100%;
-
 margin-top: 20px;
-
 border: none;
-
 background: #84cc16;
-
 color: white;
-
 padding: 16px;
-
 border-radius: 20px;
-
 font-size: 20px;
-
 font-weight: bold;
-
 cursor: pointer;
 }
 
 .warning {
 margin-top: 20px;
-
 background: #fecaca;
-
 color: #991b1b;
-
 padding: 14px;
-
 border-radius: 16px;
-
 text-align: center;
-
 font-weight: bold;
 }
 
@@ -187,13 +120,9 @@ margin-top: 20px;
 
 .sensor-status {
 padding: 12px;
-
 border-radius: 16px;
-
 text-align: center;
-
 font-weight: bold;
-
 margin-bottom: 10px;
 }
 
@@ -209,20 +138,12 @@ color: #991b1b;
 
 .sensor-button {
 width: 100%;
-
 border: none;
-
 background: #38bdf8;
-
 color: white;
-
 padding: 14px;
-
 border-radius: 18px;
-
 font-size: 16px;
-
 font-weight: bold;
-
 cursor: pointer;
 }
