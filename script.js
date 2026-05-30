@@ -354,7 +354,9 @@ setInterval(() => {
     }
 
     if (field.humidity < 0) {
+
       field.humidity = 0;
+
     }
 
   });
