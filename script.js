@@ -60,4 +60,19 @@ function loadData() {
       createField();
       return;
     }
+
+    renderFields();
+
+  }
+
+  catch(error) {
+
+    console.log(error);
+
+    createField();
+
+  }
+
+}
+
 loadData();
